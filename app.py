@@ -3,6 +3,8 @@ import streamlit as st
 import pandas as pd
 import joblib
 
+st.write("App Started")
+
 st.title(" Customer Churn Prediction System")
 st.markdown("Predict whether a customer is likely to churn using Machine Learning.")
 
@@ -20,10 +22,14 @@ st.sidebar.info(
     """
 )
 
-# Load Model
-model = joblib.load("model/churn_model.pkl")
-scaler = joblib.load("model/scaler.pkl")
-feature_names = joblib.load("model/feature_names.pkl")
+try:
+    model = joblib.load("model/churn_model.pkl")
+    scaler = joblib.load("model/scaler.pkl")
+    feature_names = joblib.load("model/feature_names.pkl")
+    st.success("Models Loaded Successfully")
+except Exception as e:
+    st.error(e)
+    st.stop()
 
 st.write("Enter Customer Details")
 
